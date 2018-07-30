@@ -32,7 +32,7 @@ public class SwaggerConfig {
 
 	@SuppressWarnings("unchecked")
 	Predicate<String> path() {
-		return or(regex("/poc/.*"), regex("/login"), regex("/signup"), regex("/logout"), regex("/showAll"), regex("/removeUser/*"));
+		return or(regex("/poc/.*"), regex("/v1/.*"), regex("/login"), regex("/signup"), regex("/logOut"), regex("/showAll"), regex("/removeUser/.*"));
 	}
 
 	private ApiInfo metaInfo() {

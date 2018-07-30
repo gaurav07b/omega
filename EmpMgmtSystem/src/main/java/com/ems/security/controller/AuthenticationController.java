@@ -2,6 +2,8 @@ package com.ems.security.controller;
 
 import java.util.concurrent.TimeUnit;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +24,7 @@ import com.ems.security.service.RedisService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-
+import static com.ems.security.model.Constants.*;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -60,25 +62,25 @@ public class AuthenticationController {
         return ResponseEntity.ok(new AuthToken(token));
     }
     
-//    @PostMapping("/logout")
-//    public ResponseData logOutUser(HttpServletRequest req) {
-//    	String token = req.getHeader(HEADER_STRING).replace(TOKEN_PREFIX,"");
-//    		redis.deleteValue(jwtTokenUtil.getUsernameFromToken(token));
-//    		response.setMessage("You have successfully loggedOut");
-//    		response.setResponse("You have to logIn again to continue");
-//    		return response;
-//    }
-    
-    @PostMapping("/logout")
-    public ResponseData logOutUser(@RequestBody UserDto userDto) {
-    	//redisTemplate.opsForValue().getOperations().delete(userDto.getUsername());
-    	redis.deleteValue(userDto.getUsername());
-    	Object obj = redis.getValue(userDto.getUsername());
-    	System.out.println(obj);
-    	response.setCode("200");
-    	response.setMessage("You have successfully loggedOut");
-    	response.setResponse("You have to logIn again to continue");
-		return response;
+    @DeleteMapping("/logout")
+    public ResponseData logOutUser(HttpServletRequest req) {
+    	String token = req.getHeader(HEADER_STRING).replace(TOKEN_PREFIX,"");
+    	redisTemplate.opsForValue().getOperations().delete(jwtTokenUtil.getUsernameFromToken(token));
+    		response.setMessage("You have successfully loggedOut");
+    		response.setResponse("You have to logIn again to continue");
+    		return response;
     }
+    
+//    @PostMapping("/logOut")
+//    public ResponseData logOutUser(@RequestBody UserDto userDto) {
+//    	redisTemplate.opsForValue().getOperations().delete(userDto.getUsername());
+//    	//redis.deleteValue(userDto.getUsername());
+//    	//Object obj = redis.getValue(userDto.getUsername());
+//    	//System.out.println(obj);
+//    	response.setCode("200");
+//    	response.setMessage("You have successfully loggedOut");
+//    	response.setResponse("You have to logIn again to continue");
+//		return response;
+//    }
 
 }

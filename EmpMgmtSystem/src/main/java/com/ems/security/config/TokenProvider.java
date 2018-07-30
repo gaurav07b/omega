@@ -1,6 +1,9 @@
 package com.ems.security.config;
 
 import io.jsonwebtoken.*;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -19,6 +22,9 @@ import static com.ems.security.model.Constants.*;
 
 @Component
 public class TokenProvider implements Serializable {
+	
+	@Autowired
+    private RedisTemplate<String,String> redisTemplate;
 
     public String getUsernameFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);
@@ -68,7 +74,7 @@ public class TokenProvider implements Serializable {
     public Boolean validateToken(String token, UserDetails userDetails) {
         final String username = getUsernameFromToken(token);
         return (
-              username.equals(userDetails.getUsername())
+              redisTemplate.hasKey(username) && username.equals(userDetails.getUsername())
                     && !isTokenExpired(token));
     }
 

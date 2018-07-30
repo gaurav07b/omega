@@ -19,7 +19,7 @@ import io.swagger.annotations.ApiOperation;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController("signUpController")
-@Api(tags = "1-SignUp/Remove Resources", value = "register", description = "REGISTER HERE")
+@Api(tags = "1-SignUpRemove Resources", value = "register", description = "REGISTER HERE")
 public class UserController {
 
 	@Autowired
@@ -49,6 +49,9 @@ public class UserController {
 	@PreAuthorize("hasRole('ADMIN')")
 	@ApiOperation(value = "All Users registered")
 	@RequestMapping(value="/showAll", method = RequestMethod.GET)
+	@ApiImplicitParams({
+	    @ApiImplicitParam(name = "Authorization", value = "Authorization token", 
+	                      required = true, dataType = "string", paramType = "header") })
 	public List<UserDto> showAllUsers(){
 		List<UserDto> lst = new ArrayList<>();
 		List<User> lst2 = userService.findAll();
