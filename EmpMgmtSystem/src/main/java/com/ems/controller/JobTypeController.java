@@ -15,6 +15,7 @@ import com.ems.dto.JobTypeDto;
 import com.ems.response.ResponseData;
 import com.ems.service.JobServiceImpl;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -33,6 +34,7 @@ import io.swagger.annotations.ApiResponses;
 				
 		}
 		)
+@Api(tags = "4-Jobtype Resources", value = "jobType", description = "SHOWS JOBTYPE OPERATIONS")
 public class JobTypeController {
 	
 	@Autowired

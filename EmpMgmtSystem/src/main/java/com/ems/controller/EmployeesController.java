@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ems.service.IEmployeeService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -33,6 +34,7 @@ import com.ems.response.ResponseData;
 				
 		}
 		)
+@Api(tags = "7-Employee Resources", value = "employees", description = "SHOWS EMPLOYEE OPERATIONS")
 public class EmployeesController {
 
 	@Autowired
@@ -55,7 +57,7 @@ public class EmployeesController {
 //******************************************getOne**********************************************
 	@PreAuthorize("hasAnyRole('USER','ADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	@ApiOperation(value="Get one Employee details by Id")
+	@ApiOperation(value="Get single Employee details by Id")
 	@ApiImplicitParams({
 	    @ApiImplicitParam(name = "Authorization", value = "Authorization token", 
 	                      required = true, dataType = "string", paramType = "header") })

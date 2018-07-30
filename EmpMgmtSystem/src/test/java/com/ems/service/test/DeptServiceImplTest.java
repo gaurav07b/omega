@@ -24,6 +24,7 @@ public class DeptServiceImplTest {
 
 	@Autowired
 	private DeptServiceImpl dsi;
+	
 	@MockBean
 	private DepartmentRepository deptRepo;	
 	
@@ -60,7 +61,7 @@ public class DeptServiceImplTest {
 		lst.add(new DepartmentsDto(12, "ServiceTest1", "TestLocation1", null));
 		lst.add(new DepartmentsDto(21, "ServiceTest2", "TestLocation2", null));
 		
-		when(dsi.findOneDept(Mockito.anyInt())).thenReturn(dDto);
+		Mockito.when(dsi.findOneDept(Mockito.anyInt())).thenReturn(dDto);
 		DepartmentsDto deptDto = dsi.findOneDept(1);
 		assertNotNull(deptDto);
 	}

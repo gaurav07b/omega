@@ -8,5 +8,4 @@ import com.ems.dao.entity.Role;
 @Repository
 public interface RoleDao extends CrudRepository<Role, Long>{
 	Role findRoleByName(String roleName);
-
 }

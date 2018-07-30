@@ -29,7 +29,7 @@ public class JobTypeDto {
 	public void setJobType(String jobType) {
 		this.jobType = jobType;
 	}
-
+	
 	public Set<EmployeesDto> getEmployees() {
 		return employees;
 	}
@@ -37,7 +37,7 @@ public class JobTypeDto {
 	public void setEmployees(Set<EmployeesDto> employees) {
 		this.employees = employees;
 	}
-	
+
 	public JobTypeDto(Integer jobId, String jobType, Set<EmployeesDto> employees) {
 		super();
 		this.jobId = jobId;

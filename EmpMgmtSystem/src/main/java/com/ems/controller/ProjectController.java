@@ -15,6 +15,7 @@ import com.ems.dto.ProjectDto;
 import com.ems.response.ResponseData;
 import com.ems.service.IProjectService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -33,6 +34,7 @@ import io.swagger.annotations.ApiResponses;
 				
 		}
 		)
+@Api(tags = "6-Project Resources", value = "project", description = "SHOWS PROJECT OPERATIONS")
 public class ProjectController {
 	
 	@Autowired

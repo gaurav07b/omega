@@ -15,6 +15,7 @@ import com.ems.dto.SalaryDto;
 import com.ems.response.ResponseData;
 import com.ems.service.ISalaryService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -33,6 +34,7 @@ import io.swagger.annotations.ApiResponses;
 				
 		}
 		)
+@Api(tags = "3-Salary Resources", value = "salary", description = "SHOWS SALARY OPERATIONS")
 public class SalaryController {
 	
 	@Autowired

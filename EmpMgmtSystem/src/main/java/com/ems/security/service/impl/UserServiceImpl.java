@@ -66,11 +66,15 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
 	@Override
 	public User findOne(String username) {
-		return userDao.findByUsername(username);
+		User user = userDao.findByUsername(username);
+		if(user==null) {
+			System.out.println(username+ " is invalid");
+		}
+			return user;
 	}
 
 	@Override
-	public User findById(Long id) {
+	public User findById(long id) {
 		return userDao.findById(id).get();
 	}
 

@@ -15,6 +15,7 @@ import com.ems.dto.DepartmentsDto;
 import com.ems.response.ResponseData;
 import com.ems.service.IDepartmentService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -23,6 +24,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController("deptController")
 @RequestMapping("/poc/department")
+
 @ApiResponses(
 		value = {
 				@ApiResponse(code = 200, message = "Status OK"),
@@ -33,6 +35,7 @@ import io.swagger.annotations.ApiResponses;
 				
 		}
 		)
+@Api(tags = "5-Department Resources", value = "departments", description = "<br>SHOWS DEPARTMENT OPERATIONS</br>")
 public class DepartmentsController {
 	
 	@Autowired IDepartmentService deptService;
@@ -40,7 +43,7 @@ public class DepartmentsController {
 //******************************************getAll*********************************************
 	@PreAuthorize("hasAnyRole('USER','ADMIN')")
 	@RequestMapping(method = RequestMethod.GET)
-	@ApiOperation(value="List of all departments", response = DepartmentsDto.class)
+	@ApiOperation(value="List of all departments"/*, response = DepartmentsDto.class*/, notes ="<b> Departments: </b> \t\n 1. fetch all departmets")
 	@ApiImplicitParams({
 	    @ApiImplicitParam(name = "Authorization", value = "Authorization token", 
 	                      required = true, dataType = "string", paramType = "header") })
@@ -54,7 +57,7 @@ public class DepartmentsController {
 //******************************************getOne**********************************************	
 	@PreAuthorize("hasAnyRole('USER','ADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	@ApiOperation(value="Get one Department by Id")
+	@ApiOperation(value="Get one Department by Id", notes ="<b> Departments: </b> \t\n 1. fetch one departmet \t\n 2. ID is required")
 	@ApiImplicitParams({
 	    @ApiImplicitParam(name = "Authorization", value = "Authorization token", 
 	                      required = true, dataType = "string", paramType = "header") })
@@ -68,7 +71,7 @@ public class DepartmentsController {
 //******************************************addNew**********************************************
 	@PreAuthorize("hasRole('ADMIN')")
 	@RequestMapping(method = RequestMethod.POST, consumes= {MediaType.APPLICATION_JSON_VALUE})
-	@ApiOperation(value="Add new Department")
+	@ApiOperation(value="Add new Department", notes ="<b> Departments: </b> \t\n 1. add new department")
 	@ApiImplicitParams({
 	    @ApiImplicitParam(name = "Authorization", value = "Authorization token", 
 	                      required = true, dataType = "string", paramType = "header") })
@@ -82,7 +85,7 @@ public class DepartmentsController {
 //******************************************deleteOne**********************************************	
 	@PreAuthorize("hasRole('ADMIN')")
 	@RequestMapping(value = "/{id}", method=RequestMethod.DELETE)
-	@ApiOperation(value="Delete Department by Id")
+	@ApiOperation(value="Delete Department by Id", notes ="<b> Departments: </b> \t\n 1. Deletes one departmet by ID \t\n 2. ID is required")
 	@ApiImplicitParams({
 	    @ApiImplicitParam(name = "Authorization", value = "Authorization token", 
 	                      required = true, dataType = "string", paramType = "header") })
